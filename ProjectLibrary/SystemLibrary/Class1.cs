@@ -60,11 +60,32 @@ namespace SystemLibrary
         public static Books AddBook()
         {
             Console.Write("Enter Book Name : ");
-            string name = Console.ReadLine();
+            string ?name = Console.ReadLine();
+            if (name == null)
+            {
+                throw new InvalidDataException("Please Enter User Name ");
+            }
             Console.Write("Enter Book ID : ");
-            int id = int.Parse(Console.ReadLine());
+            int id;
+            if (int.TryParse(Console.ReadLine(), out int i))
+            {
+                id = i;
+            }
+            else
+            {
+                throw new InvalidOperationException("Invalid Data");
+            }
             Console.Write("Enter Book Quantity : ");
-            int quantity = int.Parse(Console.ReadLine());
+
+            int quantity;
+            if (int.TryParse(Console.ReadLine(), out int q))
+            {
+                quantity = q;
+            }
+            else
+            {
+                throw new InvalidOperationException("Invalid Data");
+            }
             return new Books { Name = name, ID = id, Quantity = quantity };
         }
         public override string ToString()
